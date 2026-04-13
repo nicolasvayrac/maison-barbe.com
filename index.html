@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maison Barbé — Charcutier Traiteur, Louviers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Jost',sans-serif;background:#FAF6EE;color:#1A1A1A;line-height:1.7;overflow-x:hidden}
+    :root{
+      --beige:#FAF6EE;--beige2:#F2E9D8;--beige3:#E4D5BC;
+      --noir:#1A1A1A;--noir2:#2C2C2C;
+      --rose:#E0407B;--rose-dark:#C02860;--rose-pale:#F8D7E5;
+      --gold:#B08850;--white:#fff
+    }
+    nav{position:fixed;top:0;left:0;right:0;z-index:999;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 3.5rem;background:rgba(250,246,238,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--beige3);transition:box-shadow .3s}
+    nav.scrolled{box-shadow:0 2px 30px rgba(0,0,0,.08)}
+    .nav-logo{display:flex;align-items:center;gap:.85rem;text-decoration:none}
+    .logo-text-wrap{display:flex;flex-direction:column;line-height:1.15}
+    .logo-name{font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;font-weight:700;color:var(--noir);letter-spacing:.01em}
+    .logo-sub{font-family:'Jost',sans-serif;font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--rose)}
+    .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+    .nav-links a{font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--noir2);position:relative;padding-bottom:2px;transition:color .25s}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--rose);transition:width .3s}
+    .nav-links a:hover{color:var(--rose)}
+    .nav-links a:hover::after{width:100%}
+    .nav-cta{background:var(--noir)!important;color:#fff!important;padding:.5rem 1.3rem;border-radius:2px}
+    .nav-cta:hover{background:var(--rose)!important}
+    .nav-cta::after{display:none!important}
+    .hero{position:relative;height:100vh;min-height:620px;display:flex;align-items:flex-end;background:var(--noir);overflow:hidden}
+    .hero-bg-fallback{position:absolute;inset:0;background:linear-gradient(160deg,#2a1a10 0%,#1A1A1A 60%,#2d0f1e 100%)}
+    .hero-bg{position:absolute;inset:0;background-image:url('./images/planche.jpg');background-size:cover;background-position:center 20%;opacity:.45}
+    .hero-vignette{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,26,26,1) 0%,rgba(26,26,26,.3) 45%,rgba(26,26,26,.1) 100%)}
+    .hero-content{position:relative;width:100%;padding:0 3.5rem 5rem;display:grid;grid-template-columns:1fr auto;align-items:flex-end;gap:3rem}
+    .hero-left{max-width:680px}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:.75rem;font-family:'Cormorant Garamond',serif;font-size:.85rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);margin-bottom:1.25rem}
+    .hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--rose)}
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5.5vw,5rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:1.25rem}
+    .hero h1 em{font-style:italic;color:var(--rose)}
+    .hero-desc{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;color:rgba(255,255,255,.75);line-height:1.7;max-width:500px;margin-bottom:2.5rem}
+    .hero-btns{display:flex;gap:.85rem;flex-wrap:wrap}
+    .btn{display:inline-block;text-decoration:none;border-radius:2px;font-family:'Jost',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;transition:all .3s}
+    .btn-rose{background:var(--rose);color:#fff;padding:.85rem 2rem}
+    .btn-rose:hover{background:var(--rose-dark);transform:translateY(-1px)}
+    .btn-ghost{border:1px solid rgba(255,255,255,.4);color:#fff;padding:.85rem 2rem}
+    .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+    .btn-dark{background:var(--noir);color:#fff;padding:.85rem 2rem}
+    .btn-dark:hover{background:var(--rose)}
+    .hero-right{display:flex;flex-direction:column;gap:1rem;padding-bottom:.5rem}
+    .hero-info-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(6px);padding:1rem 1.25rem;border-radius:2px;display:flex;align-items:center;gap:.75rem;min-width:220px}
+    .hero-info-icon{color:var(--rose);flex-shrink:0}
+    .hero-info-label{font-family:'Jost',sans-serif;font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+    .hero-info-value{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:#fff;line-height:1.3}
+    .hero-info-value a{color:#fff;text-decoration:none}
+    .strip{background:var(--noir);display:flex;align-items:center;justify-content:center;flex-wrap:wrap;border-bottom:2px solid var(--rose)}
+    .strip-item{display:flex;align-items:center;gap:.6rem;padding:1rem 2rem;font-family:'Cormorant Garamond',serif;font-size:.95rem;color:rgba(255,255,255,.7);border-right:1px solid rgba(255,255,255,.08)}
+    .strip-item:last-child{border-right:none}
+    .strip-item svg{color:var(--rose);flex-shrink:0}
+    section{padding-top:70px;margin-top:-70px}
+    .sw{max-width:1180px;margin:0 auto;padding:5.5rem 3rem}
+    .eyebrow{font-family:'Cormorant Garamond',serif;font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);display:block;margin-bottom:.6rem}
+    .st{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:700;color:var(--noir);line-height:1.2}
+    .st em{font-style:italic;color:var(--rose)}
+    .rule{display:flex;align-items:center;gap:.75rem;margin:1.1rem 0 1.5rem}
+    .rule span{display:block;height:1px;width:50px;background:var(--beige3)}
+    .rule em{color:var(--rose);font-size:.9rem;line-height:1}
+    .rule.lt span{background:rgba(255,255,255,.15)}
+    .sl{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:#666;line-height:1.85}
+    .fi{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+    .fi.in{opacity:1;transform:none}
+    /* ABOUT */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    .about-img-col{position:relative}
+    .about-img-frame{position:relative;aspect-ratio:3/4;background:var(--beige2);border-radius:2px;overflow:hidden}
+    .about-img-frame img{width:100%;height:100%;object-fit:cover;display:block}
+    .about-badge{position:absolute;bottom:-1.5rem;right:-1.5rem;width:112px;height:112px;border-radius:50%;background:var(--rose);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;box-shadow:0 6px 30px rgba(224,64,123,.4)}
+    .about-badge strong{font-family:'Playfair Display',serif;font-size:2.2rem;line-height:1}
+    .about-badge small{font-family:'Jost',sans-serif;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;opacity:.9}
+    .about-text h2{font-family:'Playfair Display',serif;font-size:2.4rem;line-height:1.15;margin-bottom:.5rem}
+    .about-text h2 em{font-style:italic;color:var(--rose)}
+    .about-text p{font-family:'Cormorant Garamond',serif;font-size:1.12rem;color:#5a5a5a;line-height:1.9;margin-bottom:1rem}
+    .feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-top:2rem}
+    .feat{background:var(--beige2);border-radius:2px;padding:.9rem 1rem;display:flex;align-items:flex-start;gap:.7rem}
+    .feat-icon{color:var(--rose);flex-shrink:0;margin-top:2px}
+    .feat-label{font-family:'Jost',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+    .feat-desc{font-family:'Cormorant Garamond',serif;font-size:.93rem;color:#777;margin-top:.15rem}
+    /* PRODUITS */
+    #charcuterie{background:var(--noir)}
+    .pg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;margin-top:3rem}
+    .pc{position:relative;aspect-ratio:1;overflow:hidden;cursor:pointer;background:#111}
+    .pc img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s ease;filter:brightness(.88) saturate(1.05)}
+    .pc:hover img{transform:scale(1.06);filter:brightness(.7) saturate(1.1)}
+    .pph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;transition:transform .55s ease}
+    .pc:hover .pph{transform:scale(1.05)}
+    .c1{background:linear-gradient(135deg,#3d1f10,#6b3420)}
+    .c2{background:linear-gradient(135deg,#1a1a1a,#2d2d2d)}
+    .c3{background:linear-gradient(135deg,#4a2015,#7b3020)}
+    .c4{background:linear-gradient(135deg,#2a1a08,#5a3a10)}
+    .c5{background:linear-gradient(135deg,#3a200d,#7a4520)}
+    .c6{background:linear-gradient(135deg,#180810,#3d1528)}
+    .pph svg{width:36px;color:rgba(255,255,255,.18)}
+    .pph-n{font-family:'Cormorant Garamond',serif;font-size:.78rem;letter-spacing:.15em;color:rgba(255,255,255,.2);text-transform:uppercase}
+    .po{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,0) 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.25rem 1.5rem;opacity:0;transition:opacity .3s}
+    .pc:hover .po{opacity:1}
+    .pn{font-family:'Playfair Display',serif;font-size:1.15rem;color:#fff;font-weight:600;margin-bottom:.2rem}
+    .pd{font-family:'Cormorant Garamond',serif;font-size:.88rem;color:rgba(255,255,255,.65)}
+    .pb{position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--rose);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+    .pc:hover .pb{transform:scaleX(1)}
+    .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:1.5px;border-top:1px solid rgba(255,255,255,.06)}
+    .stat{padding:2rem;text-align:center;border-right:1px solid rgba(255,255,255,.06)}
+    .stat:last-child{border-right:none}
+    .stat-num{font-family:'Playfair Display',serif;font-size:2.8rem;color:var(--rose);display:block;line-height:1;margin-bottom:.4rem}
+    .stat-lbl{font-family:'Cormorant Garamond',serif;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+    /* PLATS */
+    #plats{background:var(--beige2)}
+    .plats-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    .plats-imgs{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+    .pimg{aspect-ratio:1;border-radius:2px;overflow:hidden;background:var(--beige3);position:relative}
+    .pimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+    .pimg:hover img{transform:scale(1.04)}
+    .pimg.tall{grid-row:span 2;aspect-ratio:auto}
+    .plph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;padding:1.5rem}
+    .pp1{background:linear-gradient(135deg,#3d1a05,#7a4010)}
+    .pp2{background:linear-gradient(135deg,#2d1a30,#5a2050)}
+    .pp3{background:linear-gradient(135deg,#4a1a10,#8b3030)}
+    .plph svg{width:28px;color:rgba(255,255,255,.2)}
+    .plph span{font-family:'Cormorant Garamond',serif;font-size:.75rem;letter-spacing:.12em;color:rgba(255,255,255,.2);text-transform:uppercase}
+    .menu-list{list-style:none;margin:1.5rem 0 2rem;display:flex;flex-direction:column;gap:.6rem}
+    .menu-list li{display:flex;align-items:center;gap:.75rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#444;padding:.65rem 1rem;background:var(--beige);border-radius:2px;border-left:3px solid transparent;transition:border-color .2s}
+    .menu-list li:hover{border-color:var(--rose)}
+    .menu-list li::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:var(--rose);flex-shrink:0}
+    /* TRAITEUR */
+    #traiteur{background:var(--beige)}
+    .traiteur-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3.5rem}
+    .tc{background:#fff;border-radius:2px;box-shadow:0 2px 24px rgba(0,0,0,.05);overflow:hidden;transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column}
+    .tc:hover{transform:translateY(-4px);box-shadow:0 10px 40px rgba(0,0,0,.1)}
+    .tc-head{padding:2rem 2rem 1.5rem;display:flex;align-items:flex-start;gap:1rem}
+    .tc-icon{width:52px;height:52px;border-radius:50%;background:var(--rose-pale);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--rose)}
+    .tc-title{font-family:'Playfair Display',serif;font-size:1.4rem}
+    .tc-sub{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--rose);font-style:italic;margin-top:.1rem}
+    .tc-body{padding:0 2rem 1.5rem;flex:1}
+    .tc-body p{font-family:'Cormorant Garamond',serif;font-size:1.07rem;color:#666;line-height:1.85;margin-bottom:1rem}
+    .pl{list-style:none;display:flex;flex-direction:column;gap:.35rem}
+    .pl li{display:flex;align-items:center;gap:.6rem;font-family:'Jost',sans-serif;font-size:.82rem;color:var(--noir2)}
+    .pl li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--rose);flex-shrink:0}
+    .tc-foot{padding:1.2rem 2rem;background:var(--beige2);display:flex;align-items:center;justify-content:space-between}
+    .la{font-family:'Jost',sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--rose);text-decoration:none;display:flex;align-items:center;gap:.4rem;transition:gap .2s}
+    .la:hover{gap:.7rem}
+    .traiteur-cta{background:var(--noir);padding:3rem;border-radius:2px;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+    .traiteur-cta h3{font-family:'Playfair Display',serif;font-size:1.75rem;color:#fff;margin-bottom:.4rem}
+    .traiteur-cta h3 em{font-style:italic;color:var(--rose)}
+    .traiteur-cta p{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:rgba(255,255,255,.5)}
+    /* REALISATIONS */
+    #realisations{background:var(--beige2)}
+    .masonry{columns:3;column-gap:1rem}
+    .mi{break-inside:avoid;margin-bottom:1rem;border-radius:2px;overflow:hidden;position:relative;cursor:pointer}
+    .mi img{width:100%;display:block;transition:transform .45s}
+    .mi:hover img{transform:scale(1.04)}
+    .mph{width:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;padding:3rem 2rem}
+    .m1{background:linear-gradient(135deg,#3d1f10,#7a3c20)}
+    .m2{background:linear-gradient(135deg,#1a1410,#3a2818)}
+    .m3{background:linear-gradient(135deg,#2d1020,#6a2045)}
+    .m4{background:linear-gradient(135deg,#3a2510,#7a5020)}
+    .m5{background:linear-gradient(135deg,#1a1a1a,#2d2d2d)}
+    .m6{background:linear-gradient(135deg,#4a1005,#9a2800)}
+    .m7{background:linear-gradient(135deg,#201530,#4a2860)}
+    .m8{background:linear-gradient(135deg,#2a1a08,#6a4015)}
+    .mph svg{width:32px;color:rgba(255,255,255,.18)}
+    .mph span{font-family:'Cormorant Garamond',serif;font-size:.75rem;letter-spacing:.14em;color:rgba(255,255,255,.2);text-transform:uppercase}
+    .mo{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 55%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:1.1rem}
+    .mi:hover .mo{opacity:1}
+    .mt{font-family:'Cormorant Garamond',serif;font-size:.92rem;color:#fff;font-style:italic}
+    /* CONTACT */
+    #contact{background:var(--beige)}
+    .contact-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:5rem;align-items:start}
+    .ch2{font-family:'Playfair Display',serif;font-size:2rem;line-height:1.2;margin-bottom:2rem}
+    .ch2 em{font-style:italic;color:var(--rose)}
+    .ib{margin-bottom:1.75rem}
+    .il{font-family:'Jost',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);margin-bottom:.35rem}
+    .iv{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--noir);line-height:1.65}
+    .iv a{color:var(--noir);text-decoration:none;transition:color .2s}
+    .iv a:hover{color:var(--rose)}
+    .hbox{background:#fff;border-radius:2px;padding:1.5rem;box-shadow:0 2px 16px rgba(0,0,0,.06);margin-top:1.5rem}
+    .hbox h4{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:1.1rem}
+    .hr{display:flex;justify-content:space-between;align-items:baseline;padding:.32rem 0;border-bottom:1px solid var(--beige2);font-family:'Cormorant Garamond',serif;font-size:1rem}
+    .hr:last-child{border:none}
+    .hd{font-weight:600;color:var(--noir)}
+    .ht{color:#666}
+    .hc{color:var(--rose);font-style:italic}
+    .srow{display:flex;gap:.75rem;margin-top:1.75rem}
+    .sb{display:flex;align-items:center;gap:.5rem;padding:.6rem 1.1rem;border-radius:2px;font-family:'Jost',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:all .25s}
+    .sfb{background:#1877F2;color:#fff}
+    .sfb:hover{background:#1466d6}
+    .sig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff}
+    .sig:hover{opacity:.9}
+    .cfw{background:#fff;border-radius:2px;padding:2.5rem;box-shadow:0 4px 40px rgba(0,0,0,.07)}
+    .cfw h3{font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:1.75rem}
+    .cfw h3 em{font-style:italic;color:var(--rose)}
+    .f2c{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .fg{display:flex;flex-direction:column;gap:.38rem;margin-bottom:1.1rem}
+    .fg label{font-family:'Jost',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--noir2)}
+    .fg input,.fg select,.fg textarea{border:1px solid var(--beige3);background:var(--beige);border-radius:2px;padding:.72rem 1rem;font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--noir);outline:none;transition:border-color .2s;width:100%}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--rose)}
+    .fg textarea{resize:vertical;min-height:95px}
+    .fbtn{width:100%;background:var(--noir);color:#fff;border:none;padding:1rem;font-family:'Jost',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:background .3s}
+    .fbtn:hover{background:var(--rose)}
+    .mapwrap{margin-top:3rem;border-radius:2px;overflow:hidden;height:280px;background:var(--beige2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.75rem;border:1px solid var(--beige3)}
+    .mapwrap svg{width:32px;color:var(--rose);opacity:.6}
+    .mapwrap p{font-family:'Cormorant Garamond',serif;font-size:1rem;color:#888;text-align:center}
+    footer{background:var(--noir);padding:3.5rem 3.5rem 1.75rem}
+    .fg-footer{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07)}
+    .fbn{font-family:'Playfair Display',serif;font-style:italic;font-size:1.5rem;color:#fff}
+    .fbs{font-family:'Jost',sans-serif;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);margin-top:.1rem}
+    .fb p{font-family:'Cormorant Garamond',serif;font-size:.98rem;color:rgba(255,255,255,.38);line-height:1.85;margin-top:1rem}
+    .fct{font-family:'Jost',sans-serif;font-size:.67rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.1rem}
+    .fcol ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+    .fcol ul a{font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s}
+    .fcol ul a:hover{color:var(--rose)}
+    .fbot{padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .fcopy{font-family:'Jost',sans-serif;font-size:.7rem;color:rgba(255,255,255,.18)}
+    .rdot{display:inline-block;width:5px;height:5px;background:var(--rose);border-radius:50%;margin:0 .4rem;vertical-align:middle}
+    @media(max-width:1024px){
+      nav{padding:0 1.75rem}
+      .hero-content{padding:0 1.75rem 4rem;grid-template-columns:1fr}
+      .hero-right{display:none}
+      .sw{padding:4rem 1.75rem}
+      .about-grid{grid-template-columns:1fr;gap:3rem}
+      .pg{grid-template-columns:1fr 1fr}
+      .plats-layout{grid-template-columns:1fr;gap:3rem}
+      .traiteur-grid{grid-template-columns:1fr}
+      .masonry{columns:2}
+      .contact-grid{grid-template-columns:1fr;gap:3rem}
+      .fg-footer{grid-template-columns:1fr 1fr;gap:2rem}
+    }
+    @media(max-width:640px){
+      nav{padding:0 1rem}
+      .nav-links{display:none}
+      .sw{padding:3.5rem 1rem}
+      .pg{grid-template-columns:1fr 1fr;gap:1px}
+      .masonry{columns:1}
+      .f2c{grid-template-columns:1fr}
+      .fg-footer{grid-template-columns:1fr}
+      .stats-row{grid-template-columns:1fr}
+      .traiteur-cta{flex-direction:column;text-align:center}
+      .strip-item{padding:.75rem 1.25rem;font-size:.88rem}
+    }
+  </style>
+</head>
+<body>
+<nav id="nav">
+  <a href="#accueil" class="nav-logo">
+    <svg width="46" height="46" viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg">
+      <rect x="5" y="5" width="36" height="36" rx="1" fill="#1A1A1A" transform="rotate(45 23 23)"/>
+      <rect x="5" y="5" width="36" height="36" rx="0" fill="none" stroke="#E0407B" stroke-width="2.8" transform="rotate(45 23 23)"/>
+      <text x="23" y="20" font-family="Georgia,serif" font-size="9" font-weight="700" font-style="italic" fill="white" text-anchor="middle">M</text>
+      <text x="23" y="31" font-family="Georgia,serif" font-size="9" font-weight="700" font-style="italic" fill="white" text-anchor="middle">B</text>
+    </svg>
+    <div class="logo-text-wrap">
+      <span class="logo-name">Maison Barbé</span>
+      <span class="logo-sub">Charcuterie du Parvis · Louviers</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#accueil">Accueil</a></li>
+    <li><a href="#charcuterie">Charcuterie</a></li>
+    <li><a href="#plats">Plats cuisinés</a></li>
+    <li><a href="#traiteur">Traiteur</a></li>
+    <li><a href="#realisations">Réalisations</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="accueil" style="padding-top:0;margin-top:0;">
+  <div class="hero">
+    <div class="hero-bg-fallback"></div>
+    <div class="hero-bg"></div>
+    <div class="hero-vignette"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-eyebrow">Louviers · Artisan charcutier</div>
+        <h1>Charcutier &amp;<br/><em>Traiteur</em><br/>depuis 1972</h1>
+        <p class="hero-desc">Maison Barbé, référence lovérienne de la charcuterie fine et du traiteur sur mesure. Une maison d'artisan au service de vos tables, depuis plus de 50 ans.</p>
+        <div class="hero-btns">
+          <a href="#traiteur" class="btn btn-rose">Nos prestations traiteur</a>
+          <a href="#charcuterie" class="btn btn-ghost">La charcuterie</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-info-card">
+          <div class="hero-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+          <div><div class="hero-info-label">Téléphone</div><div class="hero-info-value"><a href="tel:0232400277">02 32 40 02 77</a></div></div>
+        </div>
+        <div class="hero-info-card">
+          <div class="hero-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+          <div><div class="hero-info-label">Adresse</div><div class="hero-info-value">43 Rue du Maréchal Foch<br/>27400 Louviers</div></div>
+        </div>
+        <div class="hero-info-card">
+          <div class="hero-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg></div>
+          <div><div class="hero-info-label">Horaires</div><div class="hero-info-value">Mar–Ven : 8h–13h &amp; 15h–19h30<br/>Sam : 8h–19h30</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="strip-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Artisan charcutier depuis 1972</div>
+  <div class="strip-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>43 Rue du Maréchal Foch, Louviers</div>
+  <div class="strip-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>02 32 40 02 77</div>
+  <div class="strip-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>Particuliers &amp; Entreprises</div>
+</div>
+
+<!-- ABOUT -->
+<div>
+  <div class="sw">
+    <div class="about-grid fi">
+      <div class="about-img-col">
+        <div class="about-img-frame">
+          <img src="./images/boutique.jpg" alt="Devanture Maison Barbé Louviers"/>
+        </div>
+        <div class="about-badge"><strong>50+</strong><small>ans de savoir‑faire</small></div>
+      </div>
+      <div class="about-text">
+        <span class="eyebrow">Notre maison</span>
+        <h2><em>Maison Barbé</em><br/>une institution lovérienne</h2>
+        <div class="rule"><span></span><em>✦</em><span></span></div>
+        <p>Installée au cœur de Louviers depuis plus d'un demi-siècle, la Charcuterie du Parvis — Maison Barbé — perpétue un savoir-faire artisanal exigeant, transmis de génération en génération.</p>
+        <p>De la charcuterie fine préparée chaque matin à vos côtés, aux buffets traiteur les plus soignés pour vos grandes occasions, nous mettons tout notre art à votre service.</p>
+        <div class="feat-grid">
+          <div class="feat"><svg class="feat-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><div><div class="feat-label">Fabrication artisanale</div><div class="feat-desc">Fabriqué chaque jour en boutique</div></div></div>
+          <div class="feat"><svg class="feat-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><div><div class="feat-label">Produits frais du jour</div><div class="feat-desc">Approvisionnement quotidien</div></div></div>
+          <div class="feat"><svg class="feat-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><div><div class="feat-label">Sur mesure</div><div class="feat-desc">Commandes personnalisées</div></div></div>
+          <div class="feat"><svg class="feat-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg><div><div class="feat-label">Plats cuisinés maison</div><div class="feat-desc">Prêts à emporter ou réchauffer</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHARCUTERIE -->
+<section id="charcuterie">
+  <div class="sw fi">
+    <span class="eyebrow" style="color:rgba(255,255,255,.45)">Notre boutique</span>
+    <h2 class="st" style="color:#fff">La charcuterie fine</h2>
+    <div class="rule lt"><span></span><em>✦</em><span></span></div>
+    <p class="sl" style="color:rgba(255,255,255,.45)">Jambons, boudins, saucissons, chorizo… Chaque produit est façonné avec soin selon les recettes de la maison, préparé chaque matin pour votre table.</p>
+    <div class="pg">
+      <div class="pc"><img src="./images/jambon-blanc.jpg" alt="Jambon blanc"/><div class="po"><div class="pn">Jambon blanc maison</div><div class="pd">Cuit à l'os, façon tradition</div></div><div class="pb"></div></div>
+      <div class="pc"><img src="./images/boudin-noir.jpg" alt="Boudin noir"/><div class="po"><div class="pn">Boudin noir artisan</div><div class="pd">Recette de la maison, label Maison Barbé</div></div><div class="pb"></div></div>
+      <div class="pc"><img src="./images/chorizo.jpg" alt="Chorizo"/><div class="po"><div class="pn">Chorizo fort &amp; doux</div><div class="pd">Saucisson ibérique sélectionné</div></div><div class="pb"></div></div>
+      <div class="pc"><img src="./images/boudin-blanc.jpg" alt="Boudin blanc"/><div class="po"><div class="pn">Boudin blanc maison</div><div class="pd">Délicat, parfumé aux herbes</div></div><div class="pb"></div></div>
+      <div class="pc"><img src="./images/saucisson-sec.jpg" alt="Saucisson sec"/><div class="po"><div class="pn">Saucisson sec</div><div class="pd">Affiné avec soin, 30% moins gras</div></div><div class="pb"></div></div>
+      <div class="pc"><img src="./images/croque-jambon.jpg" alt="Croque jambon"/><div class="po"><div class="pn">Croque jambon maison</div><div class="pd">Jambon, béchamel, fromage fondu</div></div><div class="pb"></div></div>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><span class="stat-num">50+</span><span class="stat-lbl">Références en boutique</span></div>
+      <div class="stat"><span class="stat-num">100%</span><span class="stat-lbl">Fabrication maison</span></div>
+      <div class="stat"><span class="stat-num">5j/7</span><span class="stat-lbl">Produits frais du jour</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATS CUISINES -->
+<section id="plats">
+  <div class="sw fi">
+    <div class="plats-layout">
+      <div class="plats-imgs">
+        <div class="pimg tall"><img src="./images/fondant-chocolat.jpg" alt="Fondant au chocolat"/></div>
+        <div class="pimg"><img src="./images/panna-cotta.jpg" alt="Panna cotta fruits rouges"/></div>
+        <div class="pimg"><img src="./images/croque-jambon.jpg" alt="Croque jambon"/></div>
+      </div>
+      <div>
+        <span class="eyebrow">Le midi &amp; le soir</span>
+        <h2 class="st">Plats cuisinés <em>maison</em></h2>
+        <div class="rule"><span></span><em>✦</em><span></span></div>
+        <p class="sl">Faits maison chaque jour, nos plats cuisinés sont prêts à emporter ou à réchauffer. Du confort de la cuisine traditionnelle directement dans votre assiette.</p>
+        <ul class="menu-list">
+          <li>Pintade terrine &amp; volailles rôties</li>
+          <li>Rôti de bœuf, entrecôtes &amp; paupiettes</li>
+          <li>Quiches, gratins &amp; flans de légumes</li>
+          <li>Croque jambon &amp; feuilletés chauds</li>
+          <li>Fondant au chocolat &amp; desserts maison</li>
+          <li>Panna cotta, bavarois &amp; entremets</li>
+        </ul>
+        <a href="#contact" class="btn btn-dark">Passer commande</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAITEUR -->
+<section id="traiteur">
+  <div class="sw fi">
+    <div style="text-align:center;margin-bottom:3.5rem">
+      <span class="eyebrow">Prestations</span>
+      <h2 class="st" style="text-align:center">Traiteur <em>sur mesure</em></h2>
+      <div class="rule" style="justify-content:center"><span></span><em>✦</em><span></span></div>
+      <p class="sl" style="text-align:center;max-width:560px;margin:0 auto">Pour vos événements privés et professionnels, Maison Barbé compose des buffets, cocktails et réceptions à votre image.</p>
+    </div>
+    <div class="traiteur-grid">
+      <div class="tc">
+        <div class="tc-head">
+          <div class="tc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+          <div><div class="tc-title">Particuliers</div><div class="tc-sub">Mariages, anniversaires, baptêmes…</div></div>
+        </div>
+        <div class="tc-body">
+          <p>Confiez-nous l'organisation culinaire de vos fêtes de famille. Du plateau apéritif simple au buffet d'exception, chaque prestation est pensée avec soin.</p>
+          <ul class="pl">
+            <li>Buffets froids &amp; cocktails dinatoires</li>
+            <li>Plateaux apéritifs charcuterie-fromages</li>
+            <li>Traiteur mariage, baptême &amp; communion</li>
+            <li>Repas de famille &amp; anniversaires</li>
+            <li>Commandes personnalisées en boutique</li>
+          </ul>
+        </div>
+        <div class="tc-foot"><a href="#contact" class="la">Demander un devis <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z"/></svg></a></div>
+      </div>
+      <div class="tc">
+        <div class="tc-head">
+          <div class="tc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg></div>
+          <div><div class="tc-title">Entreprises</div><div class="tc-sub">Séminaires, inaugurations, événements…</div></div>
+        </div>
+        <div class="tc-body">
+          <p>Impressionnez vos collaborateurs et clients avec des prestations traiteur à la hauteur de vos exigences. Facturation entreprise disponible.</p>
+          <ul class="pl">
+            <li>Cocktails d'inauguration &amp; portes ouvertes</li>
+            <li>Buffets pour séminaires &amp; conférences</li>
+            <li>Plateaux-repas livrés en entreprise</li>
+            <li>Pots de départ &amp; événements internes</li>
+            <li>Devis personnalisé sur demande</li>
+          </ul>
+        </div>
+        <div class="tc-foot"><a href="#contact" class="la">Demander un devis <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z"/></svg></a></div>
+      </div>
+    </div>
+    <div class="traiteur-cta fi">
+      <div><h3>Un événement en vue ? <em>Parlons-en.</em></h3><p>Contactez-nous pour un devis gratuit et personnalisé — nous vous répondons rapidement.</p></div>
+      <a href="#contact" class="btn btn-rose">Nous contacter</a>
+    </div>
+  </div>
+</section>
+
+<!-- REALISATIONS -->
+<section id="realisations">
+  <div class="sw fi">
+    <div style="text-align:center;margin-bottom:3rem">
+      <span class="eyebrow">Portfolio</span>
+      <h2 class="st" style="text-align:center">Nos <em>réalisations</em></h2>
+      <div class="rule" style="justify-content:center"><span></span><em>✦</em><span></span></div>
+      <p class="sl" style="text-align:center;max-width:520px;margin:0 auto">Un aperçu de nos créations : plateaux charcuterie, plats cuisinés, buffets et cocktails traiteur sur mesure.</p>
+    </div>
+    <div class="masonry">
+      <div class="mi"><img src="./images/boudin-noir.jpg" alt="Boudin noir"/><div class="mo"><span class="mt">Boudin noir artisan — label Maison Barbé</span></div></div>
+      <div class="mi"><img src="./images/fondant-chocolat.jpg" alt="Fondant chocolat"/><div class="mo"><span class="mt">Fondant au chocolat &amp; framboises</span></div></div>
+      <div class="mi"><img src="./images/chorizo.jpg" alt="Chorizo"/><div class="mo"><span class="mt">Chorizo ibérique sélectionné</span></div></div>
+      <div class="mi"><img src="./images/panna-cotta.jpg" alt="Panna cotta"/><div class="mo"><span class="mt">Panna cotta aux fruits rouges</span></div></div>
+      <div class="mi"><img src="./images/jambon-blanc.jpg" alt="Jambon blanc"/><div class="mo"><span class="mt">Jambon blanc cuit à l'os</span></div></div>
+      <div class="mi"><img src="./images/boudin-blanc.jpg" alt="Boudin blanc"/><div class="mo"><span class="mt">Boudin blanc maison aux herbes</span></div></div>
+      <div class="mi"><img src="./images/croque-jambon.jpg" alt="Croque jambon"/><div class="mo"><span class="mt">Croque jambon fromage maison</span></div></div>
+      <div class="mi"><img src="./images/saucisson-sec.jpg" alt="Saucisson sec"/><div class="mo"><span class="mt">Saucisson sec affiné Teyssier</span></div></div>
+    </div>
+    <div style="text-align:center;margin-top:3rem"><a href="#contact" class="btn btn-dark">Confiez-nous votre événement</a></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sw fi">
+    <div style="text-align:center;margin-bottom:3.5rem">
+      <span class="eyebrow">Nous trouver</span>
+      <h2 class="st" style="text-align:center">Contact &amp; <em>Accès</em></h2>
+      <div class="rule" style="justify-content:center"><span></span><em>✦</em><span></span></div>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <h2 class="ch2">Venez nous rendre visite <em>en boutique</em></h2>
+        <div class="ib"><div class="il">Adresse</div><div class="iv">43 Rue du Maréchal Foch<br/>27400 Louviers</div></div>
+        <div class="ib"><div class="il">Téléphone</div><div class="iv"><a href="tel:0232400277">02 32 40 02 77</a></div></div>
+        <div class="hbox">
+          <h4>Horaires d'ouverture</h4>
+          <div class="hr"><span class="hd">Lundi</span><span class="hc">Fermé</span></div>
+          <div class="hr"><span class="hd">Mardi</span><span class="ht">08h00 – 13h00 &amp; 15h00 – 19h30</span></div>
+          <div class="hr"><span class="hd">Mercredi</span><span class="ht">08h00 – 13h00 &amp; 15h00 – 19h30</span></div>
+          <div class="hr"><span class="hd">Jeudi</span><span class="ht">08h00 – 13h00 &amp; 15h00 – 19h30</span></div>
+          <div class="hr"><span class="hd">Vendredi</span><span class="ht">08h00 – 13h00 &amp; 15h00 – 19h30</span></div>
+          <div class="hr"><span class="hd">Samedi</span><span class="ht">08h00 – 19h30</span></div>
+          <div class="hr"><span class="hd">Dimanche</span><span class="hc">Fermé</span></div>
+        </div>
+        <div class="srow">
+          <a href="https://www.facebook.com/profile.php?id=100057566794531" target="_blank" rel="noopener" class="sb sfb"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</a>
+          <a href="https://www.instagram.com/barbe_traiteur/" target="_blank" rel="noopener" class="sb sig"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>@barbe_traiteur</a>
+        </div>
+      </div>
+      <div class="cfw fi">
+        <h3>Envoyer <em>un message</em></h3>
+        <div class="f2c">
+          <div class="fg"><label>Prénom</label><input type="text" placeholder="Marie"/></div>
+          <div class="fg"><label>Nom</label><input type="text" placeholder="Dupont"/></div>
+        </div>
+        <div class="fg"><label>Email</label><input type="email" placeholder="marie@exemple.fr"/></div>
+        <div class="fg"><label>Téléphone</label><input type="tel" placeholder="06 XX XX XX XX"/></div>
+        <div class="fg"><label>Objet de la demande</label><select><option value="">Sélectionner…</option><option>Devis traiteur particulier</option><option>Devis traiteur entreprise</option><option>Commande charcuterie</option><option>Commande plats cuisinés</option><option>Renseignement général</option><option>Autre</option></select></div>
+        <div class="fg"><label>Message</label><textarea rows="4" placeholder="Décrivez votre projet ou votre demande…"></textarea></div>
+        <button class="fbtn">Envoyer le message</button>
+      </div>
+    </div>
+    <div class="mapwrap">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      <p>43 Rue du Maréchal Foch, 27400 Louviers<br/><small style="font-size:.85rem;opacity:.6">→ Intégrez ici votre iframe Google Maps</small></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fg-footer">
+    <div class="fb">
+      <div class="fbn">Maison Barbé</div>
+      <div class="fbs">Charcuterie du Parvis · Louviers</div>
+      <p>Artisan charcutier traiteur depuis plus de 50 ans au cœur de Louviers. Savoir-faire traditionnel, produits frais, plats cuisinés maison et prestations traiteur sur mesure.</p>
+    </div>
+    <div class="fcol"><div class="fct">Navigation</div><ul><li><a href="#accueil">Accueil</a></li><li><a href="#charcuterie">Charcuterie</a></li><li><a href="#plats">Plats cuisinés</a></li><li><a href="#traiteur">Traiteur</a></li><li><a href="#realisations">Réalisations</a></li><li><a href="#contact">Contact</a></li></ul></div>
+    <div class="fcol"><div class="fct">Nos produits</div><ul><li><a href="#charcuterie">Jambons artisanaux</a></li><li><a href="#charcuterie">Boudins blanc &amp; noir</a></li><li><a href="#charcuterie">Saucissons &amp; chorizo</a></li><li><a href="#plats">Plats cuisinés maison</a></li><li><a href="#plats">Desserts &amp; entremets</a></li></ul></div>
+    <div class="fcol"><div class="fct">Informations</div><ul><li><a href="#">43 Rue du Maréchal Foch</a></li><li><a href="#">27400 Louviers</a></li><li><a href="tel:0232400277">02 32 40 02 77</a></li><li><a href="https://www.facebook.com/profile.php?id=100057566794531" target="_blank">Facebook</a></li><li><a href="https://www.instagram.com/barbe_traiteur/" target="_blank">Instagram @barbe_traiteur</a></li></ul></div>
+  </div>
+  <div class="fbot">
+    <span class="fcopy">© 2025 Maison Barbé — Charcuterie du Parvis<span class="rdot"></span>27400 Louviers</span>
+    <span class="fcopy">Mentions légales<span class="rdot"></span>Politique de confidentialité</span>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+  const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:0.1});
+  document.querySelectorAll('.fi').forEach(el=>io.observe(el));
+  document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}}));
+</script>
+</body>
+</html>

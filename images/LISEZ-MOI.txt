@@ -1,0 +1,28 @@
+DOSSIER IMAGES — Maison Barbé
+══════════════════════════════════════════════════════════
+
+Étape 1 : Placez vos photos dans CE dossier avec les noms ci-dessous
+Étape 2 : Ouvrez maison-barbe.html → les images s'affichent automatiquement
+
+OU pour un site 100% autonome (sans dossier images) :
+  → Lancez le script embed-images.py (Python requis)
+  → Il génère maison-barbe-final.html avec toutes les images intégrées
+
+══════════════════════════════════════════════════════════
+NOMS DE FICHIERS ATTENDUS :
+══════════════════════════════════════════════════════════
+
+  planche.jpg          ← HERO : La belle planche de charcuterie (photo du plateau)
+  boutique.jpg         ← Section "Notre maison" : façade de la boutique
+  boudin-noir.jpg      ← Charcuterie : boudin noir avec étiquette Maison Barbé
+  chorizo.jpg          ← Charcuterie : chorizo
+  jambon-blanc.jpg     ← Charcuterie : jambon blanc
+  fondant-chocolat.jpg ← Plats cuisinés : fondant au chocolat
+  boudin-blanc.jpg     ← Charcuterie : boudin blanc (optionnel)
+  saucisson-sec.jpg    ← Charcuterie : saucisson sec Teyssier (optionnel)
+  croque-jambon.jpg    ← Plats cuisinés : croque jambon (optionnel)
+  panna-cotta.jpg      ← Plats cuisinés : panna cotta (optionnel)
+
+══════════════════════════════════════════════════════════
+FORMAT CONSEILLÉ : JPG, résolution 1200×900 px minimum
+══════════════════════════════════════════════════════════

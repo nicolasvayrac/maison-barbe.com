@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Maison Barbé — Charcutier Traiteur, Louviers</title>
+  <link rel="icon" type="image/png" href="./images/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -252,12 +253,7 @@
 <body>
 <nav id="nav">
   <a href="#accueil" class="nav-logo">
-    <svg width="46" height="46" viewBox="0 0 46 46" xmlns="http://www.w3.org/2000/svg">
-      <rect x="5" y="5" width="36" height="36" rx="1" fill="#1A1A1A" transform="rotate(45 23 23)"/>
-      <rect x="5" y="5" width="36" height="36" rx="0" fill="none" stroke="#E0407B" stroke-width="2.8" transform="rotate(45 23 23)"/>
-      <text x="23" y="20" font-family="Georgia,serif" font-size="9" font-weight="700" font-style="italic" fill="white" text-anchor="middle">M</text>
-      <text x="23" y="31" font-family="Georgia,serif" font-size="9" font-weight="700" font-style="italic" fill="white" text-anchor="middle">B</text>
-    </svg>
+    <img src="./images/logo.png" alt="Logo Maison Barbé" style="width:46px;height:46px;object-fit:contain;flex-shrink:0;" />
     <div class="logo-text-wrap">
       <span class="logo-name">Maison Barbé</span>
       <span class="logo-sub">Charcuterie du Parvis · Louviers</span>
@@ -268,7 +264,8 @@
     <li><a href="#charcuterie">Charcuterie</a></li>
     <li><a href="#plats">Plats cuisinés</a></li>
     <li><a href="#traiteur">Traiteur</a></li>
-    <li><a href="#realisations">Réalisations</a></li>
+    <li><a href="galerie.html">Galerie</a></li>
+    <li><a href="equipe.html">Notre équipe</a></li>
     <li><a href="#contact" class="nav-cta">Contact</a></li>
   </ul>
 </nav>
@@ -467,6 +464,94 @@
 </section>
 
 <!-- CONTACT -->
+<!-- ══ SNACKING / FORMULES MIDI ══ -->
+<section id="snacking" style="padding-top:70px;margin-top:-70px;">
+  <div style="background:var(--noir);">
+    <div class="sw fi">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;">
+        <div>
+          <span class="eyebrow" style="color:rgba(255,255,255,.45)">Le midi en semaine</span>
+          <h2 class="st" style="color:#fff">Le Bon <em>Snacking</em></h2>
+          <div class="rule lt"><span></span><em>✦</em><span></span></div>
+          <p class="sl" style="color:rgba(255,255,255,.5);margin-bottom:2.5rem">Du mardi au vendredi, profitez de nos formules midi préparées avec les mêmes produits artisanaux que notre boutique. Rapide, savoureux, fait maison.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+            <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:2px;padding:1.75rem;text-align:center;">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);margin-bottom:1rem;">Formule plat</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(255,255,255,.7);line-height:1.9;margin-bottom:1.25rem;">1 plat <span style="color:rgba(255,255,255,.4);font-size:.85rem;">au choix</span><br/>1 dessert<br/>1 boisson <span style="color:rgba(255,255,255,.4);font-size:.85rem;">33cl s.a.</span></div>
+              <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--rose);line-height:1;">10<span style="font-size:1.5rem;">€50</span></div>
+            </div>
+            <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:2px;padding:1.75rem;text-align:center;">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);margin-bottom:1rem;">Formule quiche</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(255,255,255,.7);line-height:1.9;margin-bottom:1.25rem;">1 quiche <span style="color:rgba(255,255,255,.4);font-size:.85rem;">au choix</span><br/>1 dessert<br/>1 boisson <span style="color:rgba(255,255,255,.4);font-size:.85rem;">33cl s.a.</span></div>
+              <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--rose);line-height:1;">8<span style="font-size:1.5rem;">€50</span></div>
+            </div>
+          </div>
+          <p style="font-family:'Jost',sans-serif;font-size:.72rem;color:rgba(255,255,255,.25);margin-top:1rem;letter-spacing:.06em;">Du mardi au vendredi · Voir conditions en magasin</p>
+        </div>
+        <div style="position:relative;">
+          <div style="aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:linear-gradient(135deg,#3a2010,#1a1a1a);">
+            <img src="./images/snacking.jpg" alt="Formules midi Maison Barbé" style="width:100%;height:100%;object-fit:cover;display:block;opacity:.9;" onerror="this.style.display='none'"/>
+          </div>
+          <div style="position:absolute;top:-1rem;right:-1rem;background:var(--rose);color:#fff;width:90px;height:90px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 4px 20px rgba(224,64,123,.4);">
+            <span style="font-family:'Jost',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.9;">dès</span>
+            <span style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;line-height:1;">8€50</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CARTE CADEAU ══ -->
+<section id="carte-cadeau" style="padding-top:70px;margin-top:-70px;">
+  <div style="background:var(--beige2);">
+    <div class="sw fi">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;">
+        <div>
+          <span class="eyebrow">Un cadeau original</span>
+          <h2 class="st">Carte <em>cadeau</em></h2>
+          <div class="rule"><span></span><em>✦</em><span></span></div>
+          <p class="sl" style="margin-bottom:1.5rem;">Offrez le meilleur de la gastronomie artisanale à vos proches. La carte cadeau Maison Barbé est disponible en boutique, utilisable sur toute notre gamme : charcuterie fine, plats cuisinés, prestations traiteur.</p>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem;">
+            <li style="display:flex;align-items:center;gap:.75rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#444;"><span style="display:block;width:6px;height:6px;border-radius:50%;background:var(--rose);flex-shrink:0;"></span>Disponible en boutique, montant libre</li>
+            <li style="display:flex;align-items:center;gap:.75rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#444;"><span style="display:block;width:6px;height:6px;border-radius:50%;background:var(--rose);flex-shrink:0;"></span>Valable sur toute la gamme charcuterie &amp; traiteur</li>
+            <li style="display:flex;align-items:center;gap:.75rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#444;"><span style="display:block;width:6px;height:6px;border-radius:50%;background:var(--rose);flex-shrink:0;"></span>Non remboursable</li>
+            <li style="display:flex;align-items:center;gap:.75rem;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#444;"><span style="display:block;width:6px;height:6px;border-radius:50%;background:var(--rose);flex-shrink:0;"></span>Un bel emballage cadeau inclus</li>
+          </ul>
+          <a href="#contact" class="btn btn-dark">Renseignements en boutique</a>
+        </div>
+        <div style="border-radius:2px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.12);">
+          <img src="./images/carte-cadeau.jpg" alt="Carte cadeau Maison Barbé" style="width:100%;display:block;" onerror="this.style.background='linear-gradient(135deg,#f5edd8,#e4d5bc)';this.style.aspectRatio='2/1';this.style.display='block'"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TOO GOOD TO GO ══ -->
+<section id="toogoodtogo" style="padding-top:70px;margin-top:-70px;">
+  <div style="background:var(--beige);">
+    <div class="sw fi">
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:4rem;align-items:center;max-width:900px;margin:0 auto;">
+        <div style="width:120px;height:120px;border-radius:50%;background:#00857A;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 20px rgba(0,133,122,.3);">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+        </div>
+        <div>
+          <span class="eyebrow">Anti-gaspillage</span>
+          <h2 class="st">Maison Barbé sur <em>Too Good To Go</em></h2>
+          <div class="rule"><span></span><em>✦</em><span></span></div>
+          <p class="sl">Nous luttons contre le gaspillage alimentaire. Retrouvez-nous sur l'application <strong>Too Good To Go</strong> et profitez d'offres exclusives sur nos invendus du jour à prix réduit — une belle façon de savourer nos produits artisanaux tout en agissant pour la planète.</p>
+          <div style="margin-top:1.75rem;display:flex;gap:1rem;flex-wrap:wrap;">
+            <a href="https://www.toogoodtogo.com" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.6rem;background:#00857A;color:#fff;padding:.8rem 1.5rem;border-radius:2px;text-decoration:none;font-family:'Jost',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:opacity .2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+              Télécharger l'application
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="contact">
   <div class="sw fi">
     <div style="text-align:center;margin-bottom:3.5rem">

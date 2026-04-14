@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galerie — Maison Barbé, Charcutier Traiteur Louviers</title>
+  <link rel="icon" type="image/png" href="./images/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Jost',sans-serif;background:#FAF6EE;color:#1A1A1A;line-height:1.7;overflow-x:hidden}
+    :root{
+      --beige:#FAF6EE;--beige2:#F2E9D8;--beige3:#E4D5BC;
+      --noir:#1A1A1A;--noir2:#2C2C2C;
+      --rose:#E0407B;--rose-dark:#C02860;--rose-pale:#F8D7E5;
+      --gold:#B08850;--white:#fff
+    }
+
+    /* ── NAV ── */
+    nav{position:fixed;top:0;left:0;right:0;z-index:999;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 3.5rem;background:rgba(250,246,238,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--beige3);transition:box-shadow .3s}
+    nav.scrolled{box-shadow:0 2px 30px rgba(0,0,0,.08)}
+    .nav-logo{display:flex;align-items:center;gap:.85rem;text-decoration:none}
+    .logo-text-wrap{display:flex;flex-direction:column;line-height:1.15}
+    .logo-name{font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;font-weight:700;color:var(--noir);letter-spacing:.01em}
+    .logo-sub{font-family:'Jost',sans-serif;font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--rose)}
+    .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+    .nav-links a{font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--noir2);position:relative;padding-bottom:2px;transition:color .25s}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--rose);transition:width .3s}
+    .nav-links a:hover{color:var(--rose)}
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+    .nav-links a.active{color:var(--rose)}
+    .nav-cta{background:var(--noir)!important;color:#fff!important;padding:.5rem 1.3rem;border-radius:2px}
+    .nav-cta:hover{background:var(--rose)!important}
+    .nav-cta::after{display:none!important}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--noir);transition:.3s}
+
+    /* ── HERO PAGE ── */
+    .page-hero{height:380px;background:var(--noir);display:flex;align-items:flex-end;position:relative;overflow:hidden;margin-top:70px}
+    .page-hero-bg{position:absolute;inset:0;background-image:url('./images/planche.jpg');background-size:cover;background-position:center 30%;opacity:.35}
+    .page-hero-vignette{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,26,26,.95) 0%,rgba(26,26,26,.2) 100%)}
+    .page-hero-content{position:relative;padding:0 3.5rem 3.5rem;max-width:1180px;width:100%}
+    .back-link{display:inline-flex;align-items:center;gap:.5rem;font-family:'Jost',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;margin-bottom:1.5rem;transition:color .2s}
+    .back-link:hover{color:var(--rose)}
+    .back-link svg{width:14px}
+    .page-eyebrow{display:inline-flex;align-items:center;gap:.75rem;font-family:'Cormorant Garamond',serif;font-size:.85rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);margin-bottom:.75rem}
+    .page-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--rose)}
+    .page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:700;color:#fff;line-height:1.1}
+    .page-hero h1 em{font-style:italic;color:var(--rose)}
+
+    /* ── LAYOUT ── */
+    .sw{max-width:1180px;margin:0 auto;padding:5rem 3rem}
+    .fi{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+    .fi.in{opacity:1;transform:none}
+    .eyebrow{font-family:'Cormorant Garamond',serif;font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);display:block;margin-bottom:.6rem}
+    .st{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:700;color:var(--noir);line-height:1.2}
+    .st em{font-style:italic;color:var(--rose)}
+    .sl{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:#666;line-height:1.85}
+
+    /* ── FILTRES ── */
+    .filter-bar{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin:2.5rem 0 3rem}
+    .filter-btn{font-family:'Jost',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.55rem 1.25rem;border:1px solid var(--beige3);border-radius:2px;background:#fff;color:var(--noir2);cursor:pointer;transition:all .25s}
+    .filter-btn:hover{border-color:var(--rose);color:var(--rose)}
+    .filter-btn.active{background:var(--rose);border-color:var(--rose);color:#fff}
+
+    /* ── GALERIE MASONRY ── */
+    .masonry{columns:3;column-gap:1rem}
+    @media(max-width:900px){.masonry{columns:2}}
+    @media(max-width:500px){.masonry{columns:1}}
+    .mi{break-inside:avoid;margin-bottom:1rem;border-radius:2px;overflow:hidden;position:relative;cursor:pointer;display:block}
+    .mi img{width:100%;display:block;transition:transform .5s ease;filter:brightness(.92)}
+    .mi:hover img{transform:scale(1.04);filter:brightness(.75)}
+    .mi-placeholder{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;padding:3.5rem 2rem}
+    .mi-placeholder svg{width:32px;color:rgba(255,255,255,.2)}
+    .mi-placeholder span{font-family:'Cormorant Garamond',serif;font-size:.78rem;letter-spacing:.14em;color:rgba(255,255,255,.22);text-transform:uppercase;text-align:center}
+    .mo{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,transparent 55%);opacity:0;transition:opacity .35s;display:flex;flex-direction:column;justify-content:flex-end;padding:1.25rem 1.5rem}
+    .mi:hover .mo{opacity:1}
+    .mo-tag{font-family:'Jost',sans-serif;font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--rose);margin-bottom:.35rem}
+    .mo-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;font-style:italic}
+
+    /* Couleurs placeholder */
+    .g1{background:linear-gradient(135deg,#3d1f10,#7a3c20)}
+    .g2{background:linear-gradient(135deg,#1a1a1a,#2d2d2d)}
+    .g3{background:linear-gradient(135deg,#2d1020,#6a2045)}
+    .g4{background:linear-gradient(135deg,#3a2510,#7a5020)}
+    .g5{background:linear-gradient(135deg,#1a0d20,#4a1840)}
+    .g6{background:linear-gradient(135deg,#4a1005,#9a2800)}
+    .g7{background:linear-gradient(135deg,#201530,#4a2860)}
+    .g8{background:linear-gradient(135deg,#2a1a08,#6a4015)}
+    .g9{background:linear-gradient(135deg,#1a1208,#4a3010)}
+    .g10{background:linear-gradient(135deg,#3d1028,#9a2055)}
+    .g11{background:linear-gradient(135deg,#0d1a20,#1a3a4a)}
+    .g12{background:linear-gradient(135deg,#3a1a00,#8a4500)}
+
+    /* ── LIGHTBOX ── */
+    .lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);align-items:center;justify-content:center;padding:2rem}
+    .lightbox.open{display:flex}
+    .lb-inner{position:relative;max-width:880px;width:100%}
+    .lb-inner img{width:100%;max-height:80vh;object-fit:contain;border-radius:2px;display:block}
+    .lb-close{position:absolute;top:-1rem;right:-1rem;width:40px;height:40px;border-radius:50%;background:var(--rose);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:background .2s}
+    .lb-close:hover{background:var(--rose-dark)}
+    .lb-caption{text-align:center;margin-top:1.25rem}
+    .lb-caption span{font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(255,255,255,.6);font-style:italic}
+    .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+    .lb-nav:hover{background:var(--rose)}
+    .lb-prev{left:-3rem}
+    .lb-next{right:-3rem}
+
+    /* ── INSTAGRAM CTA ── */
+    .insta-cta{background:var(--noir);padding:4rem 3rem;text-align:center;margin-top:1rem}
+    .insta-cta .eyebrow{justify-content:center;display:flex}
+    .insta-cta h2{font-family:'Playfair Display',serif;font-size:2.2rem;color:#fff;margin:.5rem 0 1rem}
+    .insta-cta h2 em{font-style:italic;color:var(--rose)}
+    .insta-cta p{font-family:'Cormorant Garamond',serif;font-size:1.12rem;color:rgba(255,255,255,.5);max-width:440px;margin:0 auto 2rem}
+    .btn{display:inline-flex;align-items:center;gap:.55rem;text-decoration:none;border-radius:2px;font-family:'Jost',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;transition:all .3s}
+    .btn-rose{background:var(--rose);color:#fff;padding:.85rem 2rem}
+    .btn-rose:hover{background:var(--rose-dark);transform:translateY(-1px)}
+
+    /* ── FOOTER ── */
+    footer{background:var(--noir);color:rgba(255,255,255,.45);padding:3rem 3.5rem;font-family:'Cormorant Garamond',serif;font-size:.95rem}
+    .footer-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;gap:3rem;align-items:start}
+    .footer-brand .logo-name{color:#fff;font-size:1.1rem}
+    .footer-brand .logo-sub{font-size:.6rem}
+    .footer-brand p{margin-top:.75rem;font-size:.92rem;color:rgba(255,255,255,.35);line-height:1.8;max-width:280px}
+    .footer-links h4{font-family:'Jost',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1rem}
+    .footer-links ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+    .footer-links a{color:rgba(255,255,255,.45);text-decoration:none;font-size:.95rem;transition:color .2s}
+    .footer-links a:hover{color:var(--rose)}
+    .footer-right{text-align:right}
+    .footer-right p{font-size:.87rem;color:rgba(255,255,255,.28);line-height:1.9}
+    .footer-bottom{max-width:1180px;margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.82rem}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px){
+      nav{padding:0 2rem}
+      .page-hero-content{padding:0 2rem 2.5rem}
+      .sw{padding:4rem 2rem}
+      .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
+      .footer-right{text-align:left}
+    }
+    @media(max-width:640px){
+      nav{padding:0 1.25rem}
+      .nav-links{display:none;position:absolute;top:70px;left:0;right:0;background:rgba(250,246,238,.98);flex-direction:column;padding:1.5rem;gap:1rem;border-bottom:1px solid var(--beige3)}
+      .nav-links.open{display:flex}
+      .hamburger{display:flex}
+      .page-hero{height:280px}
+      .page-hero-content{padding:0 1.25rem 2rem}
+      .sw{padding:3rem 1.25rem}
+      .footer-grid{grid-template-columns:1fr}
+      .footer-bottom{flex-direction:column;text-align:center}
+      .lb-prev{left:-1rem}.lb-next{right:-1rem}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="./images/logo.png" alt="Logo Maison Barbé" style="width:46px;height:46px;object-fit:contain;flex-shrink:0;" />
+      <div class="logo-text-wrap">
+        <span class="logo-name">Maison Barbé</span>
+        <span class="logo-sub">Charcutier · Traiteur</span>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#charcuterie">Charcuterie</a></li>
+      <li><a href="index.html#traiteur">Traiteur</a></li>
+      <li><a href="galerie.html" class="active">Galerie</a></li>
+      <li><a href="equipe.html">Notre équipe</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Nous contacter</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO PAGE -->
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-vignette"></div>
+    <div class="page-hero-content">
+      <a href="index.html" class="back-link">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 12L6 8l4-4"/></svg>
+        Retour à l'accueil
+      </a>
+      <div class="page-eyebrow">Nos créations</div>
+      <h1>Notre <em>Galerie</em></h1>
+    </div>
+  </div>
+
+  <!-- GALERIE -->
+  <section>
+    <div class="sw">
+      <div class="fi">
+        <span class="eyebrow">Buffets · Plateaux · Réalisations</span>
+        <h2 class="st">L'art de la <em>charcuterie</em> en images</h2>
+        <p class="sl" style="margin-top:.75rem;max-width:600px">Retrouvez nos plus belles réalisations : buffets de réception, plateaux de charcuterie, cocktails d'entreprise et créations maison.</p>
+      </div>
+
+      <!-- Filtres -->
+      <div class="filter-bar fi">
+        <button class="filter-btn active" data-filter="all">Tout voir</button>
+        <button class="filter-btn" data-filter="buffet">Buffets</button>
+        <button class="filter-btn" data-filter="plateau">Plateaux</button>
+        <button class="filter-btn" data-filter="cocktail">Cocktails</button>
+        <button class="filter-btn" data-filter="produit">Produits</button>
+        <button class="filter-btn" data-filter="boutique">Boutique</button>
+      </div>
+
+      <!-- Grille masonry -->
+      <div class="masonry" id="gallery">
+
+        <!-- RANGÉE 1 -->
+        <div class="mi fi" data-cat="plateau" onclick="openLightbox(0)">
+          <img src="./images/planche.jpg" alt="Grande planche de charcuterie" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="mi-placeholder g1" style="display:none;aspect-ratio:4/3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Grande planche de charcuterie</span>
+          </div>
+          <div class="mo">
+            <span class="mo-tag">Plateau</span>
+            <span class="mo-title">Grande planche de charcuterie</span>
+          </div>
+        </div>
+
+        <div class="mi fi" data-cat="buffet" onclick="openLightbox(1)">
+          <img src="./images/buffet1.jpg" alt="Buffet de réception" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="mi-placeholder g3" style="display:none;aspect-ratio:3/4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Buffet de réception</span>
+          </div>
+          <div class="mo">
+            <span class="mo-tag">Buffet</span>
+            <span class="mo-title">Buffet de réception</span>
+          </div>
+        </div>
+
+        <div class="mi fi" data-cat="produit" onclick="openLightbox(2)">
+          <img src="./images/boudin-noir.jpg" alt="Boudin noir artisanal" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="mi-placeholder g2" style="display:none;aspect-ratio:1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Boudin noir artisanal</span>
+          </div>
+          <div class="mo">
+            <span class="mo-tag">Produit</span>
+            <span class="mo-title">Boudin noir artisanal</span>
+          </div>
+        </div>
+
+        <!-- RANGÉE 2 -->
+        <div class="mi fi" data-cat="cocktail" onclick="openLightbox(3)">
+          <img src="./images/cocktail1.jpg" alt="Cocktail d'entreprise" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="mi-placeholder g5" style="display:none;aspect-ratio:16/9">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Cocktail d'entreprise</span>
+          </div>
+          <div class="mo">
+            <span class="mo-tag">Cocktail</span>
+            <span class="mo-title">Cocktail d'entreprise</span>
+          </div>
+        </div>
+
+        <div class="mi fi" data-cat="produit" onclick="openLightbox(4)">
+          <img src="./images/chorizo.jpg" alt="Chorizo maison" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="mi-placeholder g6" style="display:none;aspect-ratio:3/4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Chorizo maison</span>
+          </div>
+          <div class="mo">
+            <span class="mo-tag">Produit</span>
+            <span class="mo-title">Chorizo maison</span>
+          </div>
+        </div>
+
+        <div class="mi fi" data-cat="boutique" onclick="openLightbox(5)">
+          <img src="./images/boutique.jpg" alt="Notre boutique" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="mi-placeholder g9" style="display:none;aspect-ratio:4/3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Notre boutique</span>
+          </div>
+          <div class="mo">
+            <span class="mo-tag">Boutique</span>
+            <span class="mo-title">Notre boutique</span>
+          </div>
+        </div>
+
+        <!-- RANGÉE 3 -->
+        <div class="mi fi" data-cat="plateau" onclick="openLightbox(6)">
+          <img src="./images/saucisson-sec.jpg" alt="Saucisson sec artisanal" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="mi-placeholder g8" style="display:none;aspect-ratio:1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Saucisson sec artisanal</span>
+          </div>
+          <div class="mo">
+            <span class="mo-tag">Plateau</span>
+            <span class="mo-title">Saucisson sec artisanal</span>
+          </div>
+        </div>
+
+        <div class="mi fi" data-cat="buffet" onclick="openLightbox(7)">
+          <img src="./images/buffet2.jpg" alt="Buffet mariage" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="mi-placeholder g4" style="display:none;aspect-ratio:16/10">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Buffet mariage</span>
+          </div>
+          <div class="mo">
+            <span class="mo-tag">Buffet</span>
+            <span class="mo-title">Buffet mariage</span>
+          </div>
+        </div>
+
+        <div class="mi fi" data-cat="produit" onclick="openLightbox(8)">
+          <img src="./images/jambon-blanc.jpg" alt="Jambon blanc supérieur" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="mi-placeholder g7" style="display:none;aspect-ratio:3/4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Jambon blanc supérieur</span>
+          </div>
+          <div class="mo">
+            <span class="mo-tag">Produit</span>
+            <span class="mo-title">Jambon blanc supérieur</span>
+          </div>
+        </div>
+
+        <!-- RANGÉE 4 -->
+        <div class="mi fi" data-cat="cocktail" onclick="openLightbox(9)">
+          <img src="./images/croque-jambon.jpg" alt="Mini-croque jambon" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="mi-placeholder g10" style="display:none;aspect-ratio:1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Mini-croque jambon</span>
+          </div>
+          <div class="mo">
+            <span class="mo-tag">Cocktail</span>
+            <span class="mo-title">Mini-croque jambon</span>
+          </div>
+        </div>
+
+        <div class="mi fi" data-cat="produit" onclick="openLightbox(10)">
+          <img src="./images/panna-cotta.jpg" alt="Panna cotta maison" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="mi-placeholder g11" style="display:none;aspect-ratio:4/3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Panna cotta maison</span>
+          </div>
+          <div class="mo">
+            <span class="mo-tag">Produit</span>
+            <span class="mo-title">Panna cotta maison</span>
+          </div>
+        </div>
+
+        <div class="mi fi" data-cat="buffet" onclick="openLightbox(11)">
+          <img src="./images/fondant-chocolat.jpg" alt="Fondant au chocolat" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="mi-placeholder g12" style="display:none;aspect-ratio:3/4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span>Fondant au chocolat</span>
+          </div>
+          <div class="mo">
+            <span class="mo-tag">Buffet</span>
+            <span class="mo-title">Fondant au chocolat</span>
+          </div>
+        </div>
+
+      </div><!-- /masonry -->
+
+      <!-- CTA ajouter photos -->
+      <p class="fi sl" style="text-align:center;margin-top:3rem;font-style:italic;color:#aaa;">
+        Retrouvez toutes nos réalisations et actualités sur&nbsp;
+        <a href="https://www.instagram.com/barbe_traiteur" target="_blank" rel="noopener" style="color:var(--rose);text-decoration:none;">@barbe_traiteur</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM CTA -->
+  <div class="insta-cta fi">
+    <span class="eyebrow">Suivez-nous</span>
+    <h2>Chaque jour, de nouvelles <em>créations</em></h2>
+    <p>Découvrez nos préparations du jour, nos buffets et nos nouveautés sur Instagram</p>
+    <a href="https://www.instagram.com/barbe_traiteur" target="_blank" rel="noopener" class="btn btn-rose">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
+      @barbe_traiteur
+    </a>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightboxBg(event)">
+    <div class="lb-inner">
+      <button class="lb-nav lb-prev" onclick="navLightbox(-1)">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 12L6 8l4-4"/></svg>
+      </button>
+      <img id="lb-img" src="" alt="" />
+      <button class="lb-nav lb-next" onclick="navLightbox(1)">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4l4 4-4 4"/></svg>
+      </button>
+      <button class="lb-close" onclick="closeLightbox()">✕</button>
+      <div class="lb-caption"><span id="lb-caption"></span></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-text-wrap">
+          <span class="logo-name" style="font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;font-weight:700;color:#fff">Maison Barbé</span>
+          <span class="logo-sub" style="font-size:.6rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--rose)">Charcutier · Traiteur · Louviers</span>
+        </div>
+        <p>Artisan charcutier-traiteur depuis plus de 30 ans au cœur de Louviers. Produits maison, savoir-faire normand.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="index.html#charcuterie">Charcuterie</a></li>
+          <li><a href="index.html#traiteur">Traiteur</a></li>
+          <li><a href="galerie.html">Galerie</a></li>
+          <li><a href="equipe.html">Notre équipe</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-right">
+        <p>43 Rue du Maréchal Foch<br>27400 Louviers<br><br>02 32 40 02 77</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Maison Barbé — Tous droits réservés</span>
+      <span>Charcutier Traiteur · 27400 Louviers</span>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 30));
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+    // Fade-in on scroll
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+
+    // Filtres
+    const items = document.querySelectorAll('.mi');
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const filter = this.dataset.filter;
+        items.forEach(item => {
+          if(filter === 'all' || item.dataset.cat === filter){
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Lightbox
+    const images = [];
+    document.querySelectorAll('.mi').forEach((el, i) => {
+      const img = el.querySelector('img');
+      const caption = el.querySelector('.mo-title');
+      images.push({
+        src: img ? img.src : '',
+        alt: img ? img.alt : '',
+        caption: caption ? caption.textContent : ''
+      });
+    });
+    let currentIdx = 0;
+    const lbImg = document.getElementById('lb-img');
+    const lbCaption = document.getElementById('lb-caption');
+    const lightbox = document.getElementById('lightbox');
+
+    function openLightbox(idx) {
+      currentIdx = idx;
+      lbImg.src = images[idx].src;
+      lbImg.alt = images[idx].alt;
+      lbCaption.textContent = images[idx].caption;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function closeLightboxBg(e){
+      if(e.target === lightbox) closeLightbox();
+    }
+    function navLightbox(dir){
+      currentIdx = (currentIdx + dir + images.length) % images.length;
+      lbImg.src = images[currentIdx].src;
+      lbImg.alt = images[currentIdx].alt;
+      lbCaption.textContent = images[currentIdx].caption;
+    }
+    document.addEventListener('keydown', e => {
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') navLightbox(-1);
+      if(e.key === 'ArrowRight') navLightbox(1);
+    });
+  </script>
+</body>
+</html>
